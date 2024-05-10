@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Dough Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pizza Dough Calculator</h1>
+        <label for="doughSize">Dough Ball Size (g):</label>
+        <input type="number" id="doughSize"><br>
+
+        <label for="numBalls">Number of Dough Balls:</label>
+        <input type="number" id="numBalls"><br>
+
+        <label for="hydration">Hydration (%):</label>
+        <input type="number" id="hydration" min="0" max="100"><br>
+
+        <label for="customize">Customize:</label>
+        <input type="checkbox" id="customize" onchange="toggleCustomization()"><br>
+
+        <div id="customFields" style="display: none;">
+            <label for="flourAmount">Flour Amount (g):</label>
+            <input type="number" id="flourAmount"><br>
+
+            <label for="yeast">Yeast (%):</label>
+            <input type="number" id="yeast" min="0"><br>
+
+            <label for="salt">Salt (%):</label>
+            <input type="number" id="salt" min="0"><br>
+        </div>
+
+        <button onclick="calculate()">Calculate</button>
+
+        <div id="results"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
