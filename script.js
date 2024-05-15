@@ -39,7 +39,7 @@ function calculate() {
     // Calculate water, salt, and yeast for the main dough
     var water = (hydration / 100) * totalFlour;
     var salt = (saltPercentage / 100) * totalFlour;
-    var yeast = (yeastPercentage / 100) * totalFlour;
+    var yeast = (yeastPercentage / 100) * (totalFlour - poolishFlour);
 
     // Subtract flour and water used in poolish from total flour and water
     totalFlour -= poolishFlour;
@@ -49,11 +49,11 @@ function calculate() {
     var resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "<h2>Results</h2>" +
                        "<h3>Poolish</h3>" +
-                       "<p>Poolish Size: " + poolishSize.toFixed(0) + "g</p>" +
-                       "<p>Poolish Flour: " + poolishFlour.toFixed(0) + "g</p>" +
-                       "<p>Poolish Water: " + poolishWater.toFixed(0) + "g</p>" +
-                       "<p>Poolish Yeast: " + poolishYeast.toFixed(2) + "g</p>" +
-                       "<h3>Main Dough</h3>" +
+                       "<p>Size: " + poolishSize.toFixed(0) + "g</p>" +
+                       "<p>Flour: " + poolishFlour.toFixed(0) + "g</p>" +
+                       "<p>Water: " + poolishWater.toFixed(0) + "g</p>" +
+                       "<p>Yeast: " + poolishYeast.toFixed(2) + "g</p>" +
+                       "<h3>Dough</h3>" +
                        "<p>Flour: " + totalFlour.toFixed(0) + "g</p>" +
                        "<p>Water: " + water.toFixed(0) + "g</p>" +
                        "<p>Salt: " + salt.toFixed(2) + "g</p>" +
