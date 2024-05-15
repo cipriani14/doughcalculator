@@ -52,7 +52,7 @@ function calculate() {
                        "<p>Poolish Size: " + poolishSize.toFixed(0) + "g</p>" +
                        "<p>Poolish Flour: " + poolishFlour.toFixed(0) + "g</p>" +
                        "<p>Poolish Water: " + poolishWater.toFixed(0) + "g</p>" +
-                       "<p>Poolish Yeast: " + poolishYeast.toFixed(2) + "g</p>"
+                       "<p>Poolish Yeast: " + poolishYeast.toFixed(2) + "g</p>" +
                        "<h3>Main Dough</h3>" +
                        "<p>Flour: " + totalFlour.toFixed(0) + "g</p>" +
                        "<p>Water: " + water.toFixed(0) + "g</p>" +
