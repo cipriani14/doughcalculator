@@ -21,6 +21,10 @@ h1 {
     margin-right: 10px; /* Adjust the spacing between the label and checkbox */
 }
 
+.customize-wrapper {
+    text-align: right;
+}
+
 input[type="checkbox"] {
     display: inline-block;
 }
