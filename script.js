@@ -63,12 +63,14 @@ function calculate() {
 
 function toggleCustomization() {
     var customFieldsDiv = document.getElementById("customFields");
-    var customizeCheckbox = document.getElementById("customize");
+    var customizeButton = document.getElementById("customizeButton");
 
-    // If the checkbox is checked, show the customFields div; otherwise, hide it
-    if (customizeCheckbox.checked) {
+    // Toggle the visibility of customFields
+    if (customFieldsDiv.style.display === "none") {
         customFieldsDiv.style.display = "block";
+        customizeButton.textContent = "Hide Customization"; // Change button text
     } else {
         customFieldsDiv.style.display = "none";
+        customizeButton.textContent = "Customize"; // Change button text back
     }
 }
