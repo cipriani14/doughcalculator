@@ -3,15 +3,20 @@ function calculate() {
     var doughSize = parseFloat(document.getElementById("doughSize").value);
     var numBalls = parseInt(document.getElementById("numBalls").value);
     var hydration = parseFloat(document.getElementById("hydration").value);
-    var saltPercentage = 3; // Default salt percentage
-    var yeastPercentage = 0.5; // Default yeast percentage
-    var wastePercentage = 5; // Waste percentage
+
+    // Check if Customize checkbox is checked
+    var customizeCheckbox = document.getElementById("customize");
+    var customFieldsDiv = document.getElementById("customFields");
+    var customYeast = parseFloat(document.getElementById("yeast").value);
+    var customSalt = parseFloat(document.getElementById("salt").value);
+    var saltPercentage = customizeCheckbox.checked ? customSalt : 3; // Default salt percentage if not customized
+    var yeastPercentage = customizeCheckbox.checked ? customYeast : 0.5; // Default yeast percentage if not customized
 
     // Calculate total weight of dough
     var totalWeightOfDough = numBalls * doughSize;
 
     // Apply waste percentage to total weight of dough
-    var totalWeightWithWaste = totalWeightOfDough * (1 + (wastePercentage / 100));
+    var totalWeightWithWaste = totalWeightOfDough * 1.05;
 
     // Calculate total percentages
     var totalPercentages = 100 + hydration + saltPercentage + yeastPercentage;
@@ -21,6 +26,9 @@ function calculate() {
 
     // Calculate total flour
     var totalFlour = totalWeightWithWaste / multiplier;
+
+    // Round flour to nearest whole number
+    totalFlour = Math.round(totalFlour);
 
     // Calculate poolish size (20% of total flour weight)
     var poolishSize = totalFlour * 0.20;
@@ -37,16 +45,19 @@ function calculate() {
     var salt = (saltPercentage / 100) * totalFlour;
     var yeast = (yeastPercentage / 100) * totalFlour;
 
+    // Round water to nearest whole number
+    water = Math.round(water);
+
     // Subtract flour and water used in poolish from total flour and water
     totalFlour -= poolishFlour;
     water -= poolishWater;
 
     // Display results
     var resultsDiv = document.getElementById("results");
-    resultsDiv.innerHTML = "<h2>Results (w/5% waste)</h2>" +
+    resultsDiv.innerHTML = "<h2>Results</h2>" +
                            "<h3>Main Dough</h3>" +
-                           "<p>Total Flour: " + totalFlour.toFixed(2) + "g</p>" +
-                           "<p>Water: " + water.toFixed(2) + "g</p>" +
+                           "<p>Total Flour: " + totalFlour + "g</p>" +
+                           "<p>Water: " + water + "g</p>" +
                            "<p>Salt: " + salt.toFixed(2) + "g</p>" +
                            "<p>Yeast: " + yeast.toFixed(2) + "g</p>" +
                            "<h3>Poolish</h3>" +
@@ -54,16 +65,4 @@ function calculate() {
                            "<p>Poolish Flour: " + poolishFlour.toFixed(2) + "g</p>" +
                            "<p>Poolish Water: " + poolishWater.toFixed(2) + "g</p>" +
                            "<p>Poolish Yeast: " + poolishYeast.toFixed(2) + "g</p>";
-}
-
-function toggleCustomization() {
-    var customizeCheckbox = document.getElementById("customize");
-    var customFieldsDiv = document.getElementById("customFields");
-
-    // If the checkbox is checked, show the customFields div; otherwise, hide it
-    if (customizeCheckbox.checked) {
-        customFieldsDiv.style.display = "block";
-    } else {
-        customFieldsDiv.style.display = "none";
-    }
 }
