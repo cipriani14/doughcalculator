@@ -6,14 +6,10 @@ function calculate() {
 
     // Check if Customize checkbox is checked
     var customizeCheckbox = document.getElementById("customize");
-    var customFieldsDiv = document.getElementById("customFields");
     var customYeast = parseFloat(document.getElementById("yeast").value);
     var customSalt = parseFloat(document.getElementById("salt").value);
     var saltPercentage = customizeCheckbox.checked ? customSalt : 3; // Default salt percentage if not customized
     var yeastPercentage = customizeCheckbox.checked ? customYeast : 0.5; // Default yeast percentage if not customized
-    var saltPercentage = 3; // Default salt percentage
-    var yeastPercentage = 0.20; // Default yeast percentage
-    var wastePercentage = 5; // Waste percentage
 
     // Calculate total weight of dough
     var totalWeightOfDough = numBalls * doughSize;
@@ -71,8 +67,8 @@ function calculate() {
 }
 
 function toggleCustomization() {
-    var customizeCheckbox = document.getElementById("customize");
     var customFieldsDiv = document.getElementById("customFields");
+    var customizeCheckbox = document.getElementById("customize");
 
     // If the checkbox is checked, show the customFields div; otherwise, hide it
     if (customizeCheckbox.checked) {
