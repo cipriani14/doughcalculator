@@ -4,7 +4,7 @@ function calculate() {
     var numBalls = parseInt(document.getElementById("numBalls").value);
     var hydration = parseFloat(document.getElementById("hydration").value);
     var saltPercentage = 3; // Default salt percentage
-    var yeastPercentage = 0.5; // Default yeast percentage
+    var yeastPercentage = 0.20; // Default yeast percentage
     var wastePercentage = 5; // Waste percentage
 
     // Calculate total weight of dough
