@@ -48,16 +48,17 @@ function calculate() {
     // Display results
     var resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "<h2>Results</h2>" +
-                       "<h3>Main Dough</h3>" +
-                       "<p>Total Flour: " + totalFlour.toFixed(0) + "g</p>" +
-                       "<p>Water: " + water.toFixed(0) + "g</p>" +
-                       "<p>Salt: " + salt.toFixed(2) + "g</p>" +
-                       "<p>Yeast: " + yeast.toFixed(2) + "g</p>" +
                        "<h3>Poolish</h3>" +
                        "<p>Poolish Size: " + poolishSize.toFixed(0) + "g</p>" +
                        "<p>Poolish Flour: " + poolishFlour.toFixed(0) + "g</p>" +
                        "<p>Poolish Water: " + poolishWater.toFixed(0) + "g</p>" +
-                       "<p>Poolish Yeast: " + poolishYeast.toFixed(2) + "g</p>";
+                       "<p>Poolish Yeast: " + poolishYeast.toFixed(2) + "g</p>"
+                       "<h3>Main Dough</h3>" +
+                       "<p>Flour: " + totalFlour.toFixed(0) + "g</p>" +
+                       "<p>Water: " + water.toFixed(0) + "g</p>" +
+                       "<p>Salt: " + salt.toFixed(2) + "g</p>" +
+                       "<p>Yeast: " + yeast.toFixed(2) + "g</p>";
+
 }
 
 function toggleCustomization() {
