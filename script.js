@@ -31,7 +31,7 @@ function calculate() {
     var totalFlour = totalWeightWithWaste / multiplier;
 
     // Round flour to nearest whole number
-    totalFlour = Math.round(totalFlour);
+    // totalFlour = Math.round(totalFlour);
 
     // Calculate poolish size (20% of total flour weight)
     var poolishSize = totalFlour * 0.20;
@@ -49,7 +49,7 @@ function calculate() {
     var yeast = (yeastPercentage / 100) * totalFlour;
 
     // Round water to nearest whole number
-    water = Math.round(water);
+    // water = Math.round(water);
 
     // Subtract flour and water used in poolish from total flour and water
     totalFlour -= poolishFlour;
