@@ -10,6 +10,9 @@
 <body>
     <div class="container">
         <h1>🍕 Pizza Dough Calculator</h1>
+
+        <label class="customize-label" for="customize">Customize:</label>
+        <input type="checkbox" id="customize" onchange="toggleCustomization()"><br>
         
         <label for="doughSize">Dough Ball Size (g):</label>
         
@@ -21,9 +24,8 @@
         <label for="hydration">Hydration (%):</label>
         <input type="number" id="hydration" min="0" max="100"><br>
 
-        <label for="customize">Customize:</label>
-        <input type="checkbox" id="customize" onchange="toggleCustomization()"><br>
-
+      <!--  <label for="customize">Customize:</label>
+        <input type="checkbox" id="customize" onchange="toggleCustomization()"><br> -->
         <div id="customFields" style="display: none;">
             <label for="yeast">Yeast (%):</label>
             <input type="number" id="yeast" min="0"><br>

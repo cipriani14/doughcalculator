@@ -16,6 +16,15 @@ h1 {
     margin: 0 auto;
 }
 
+.customize-label {
+    display: inline-block;
+    margin-right: 10px; /* Adjust the spacing between the label and checkbox */
+}
+
+input[type="checkbox"] {
+    display: inline-block;
+}
+
 .calculator {
     background-color: #fff;
     border-radius: 5px;
