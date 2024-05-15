@@ -12,13 +12,13 @@ h1 {
 
 .container {
     display: block;
-    max-width: 800px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
 .customize-label {
     display: inline-block;
-    margin-right: 7px; /* Adjust the spacing between the label and checkbox */
+    margin-right: 5px; /* Adjust the spacing between the label and checkbox */
 }
 
 .customize-wrapper {
