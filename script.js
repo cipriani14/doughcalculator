@@ -11,6 +11,9 @@ function calculate() {
     var customSalt = parseFloat(document.getElementById("salt").value);
     var saltPercentage = customizeCheckbox.checked ? customSalt : 3; // Default salt percentage if not customized
     var yeastPercentage = customizeCheckbox.checked ? customYeast : 0.5; // Default yeast percentage if not customized
+    var saltPercentage = 3; // Default salt percentage
+    var yeastPercentage = 0.20; // Default yeast percentage
+    var wastePercentage = 5; // Waste percentage
 
     // Calculate total weight of dough
     var totalWeightOfDough = numBalls * doughSize;
@@ -65,4 +68,16 @@ function calculate() {
                            "<p>Poolish Flour: " + poolishFlour.toFixed(2) + "g</p>" +
                            "<p>Poolish Water: " + poolishWater.toFixed(2) + "g</p>" +
                            "<p>Poolish Yeast: " + poolishYeast.toFixed(2) + "g</p>";
+}
+
+function toggleCustomization() {
+    var customizeCheckbox = document.getElementById("customize");
+    var customFieldsDiv = document.getElementById("customFields");
+
+    // If the checkbox is checked, show the customFields div; otherwise, hide it
+    if (customizeCheckbox.checked) {
+        customFieldsDiv.style.display = "block";
+    } else {
+        customFieldsDiv.style.display = "none";
+    }
 }
