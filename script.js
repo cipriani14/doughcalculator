@@ -65,3 +65,15 @@ function calculate() {
                            "<p>Poolish Water: " + poolishWater.toFixed(2) + "g</p>" +
                            "<p>Poolish Yeast: " + poolishYeast.toFixed(2) + "g</p>";
 }
+
+function toggleCustomization() {
+    var customFieldsDiv = document.getElementById("customFields");
+    var customizeCheckbox = document.getElementById("customize");
+
+    // If the checkbox is checked, show the customFields div; otherwise, hide it
+    if (customizeCheckbox.checked) {
+        customFieldsDiv.style.display = "block";
+    } else {
+        customFieldsDiv.style.display = "none";
+    }
+}
