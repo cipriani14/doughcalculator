@@ -3,44 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizza Dough Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Sips & Pies Dough Calculator 🍕</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ia-writer-duo@5.0.7/index.min.css">
+    <link rel="stylesheet" href="styles.css"> {/* This links to your CSS file */}
 </head>
 <body>
     <div class="container">
-        <h1>🍕 Pizza Dough Calculator</h1>
+        <h1>Sips & Pies Dough Calculator 🍕</h1>
 
-       <div class="customize-wrapper">
-            <label class="customize-label" for="customize">Customize:</label>
-            <input type="checkbox" id="customize" onchange="toggleCustomization()">
-        </div>
-        
         <label for="doughSize">Dough Ball Size (g):</label>
-        
-        <input type="number" id="doughSize"><br>
+        <input type="number" id="doughSize" value="230"><br>
 
         <label for="numBalls">Number of Dough Balls:</label>
-        <input type="number" id="numBalls"><br>
+        <input type="number" id="numBalls" value="4"><br>
 
         <label for="hydration">Hydration (%):</label>
-        <input type="number" id="hydration" min="0" max="100"><br>
+        <input type="number" id="hydration" min="0" max="100" value="66"><br>
 
-      <!--  <label for="customize">Customize:</label>
-        <input type="checkbox" id="customize" onchange="toggleCustomization()"><br> -->
-        <div id="customFields" style="display: none;">
-            <label for="yeast">Yeast (%):</label>
-            <input type="number" id="yeast" min="0"><br>
+        <div id="customFields">
+            <label for="yeast">Yeast (% of total flour):</label> 
+            <input type="number" id="yeast" min="0" step="0.01" value="0.05"><br>
 
-            <label for="salt">Salt (%):</label>
-            <input type="number" id="salt" min="0"><br>
+            <label for="salt">Salt (% of total flour):</label>
+            <input type="number" id="salt" min="0" step="0.1" value="2.7"><br>
         </div>
 
         <button onclick="calculate()">Calculate</button>
 
-        <div id="results"></div>
+        <div id="results">
+            <h2>Recipe Breakdown</h2>
+             <p style="text-align:center; color: #777;">Enter your dough parameters above and click "Calculate".</p>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script> {/* This links to your JavaScript file */}
 </body>
 </html>
