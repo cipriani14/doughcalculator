@@ -1,74 +1,86 @@
 function calculate() {
-    // Get values from input fields
-    var doughSize = parseFloat(document.getElementById("doughSize").value);
-    var numBalls = parseInt(document.getElementById("numBalls").value);
-    var hydration = parseFloat(document.getElementById("hydration").value);
+            // Get values from input fields
+            const doughSize = parseFloat(document.getElementById("doughSize").value);
+            const numBalls = parseInt(document.getElementById("numBalls").value);
+            const hydration = parseFloat(document.getElementById("hydration").value);
+            const yeastPercentageFromInput = parseFloat(document.getElementById("yeast").value);
+            const saltPercentage = parseFloat(document.getElementById("salt").value);
 
-    // Check if Customize checkbox is checked
-    var customizeCheckbox = document.getElementById("customize");
-    var customYeast = parseFloat(document.getElementById("yeast").value);
-    var customSalt = parseFloat(document.getElementById("salt").value);
-    var saltPercentage = customizeCheckbox.checked ? customSalt : 2.7; // Default salt percentage if not customized
-    var yeastPercentage = customizeCheckbox.checked ? customYeast : 0.05; // Default yeast percentage if not customized
+            // Validate basic inputs
+            if (isNaN(doughSize) || doughSize <= 0 ||
+                isNaN(numBalls) || numBalls <= 0 ||
+                isNaN(hydration) || hydration < 0 || hydration > 100 ||
+                isNaN(yeastPercentageFromInput) || yeastPercentageFromInput < 0 || 
+                isNaN(saltPercentage) || saltPercentage < 0) { 
+                displayError("Please enter valid positive values for all fields.");
+                return;
+            }
+            
+            // --- Calculation Logic ---
+            const totalDoughWeightForAllBalls = numBalls * doughSize;
+            const totalTargetDoughWeightWithBuffer = totalDoughWeightForAllBalls * 1.05; 
+            const bufferAmount = totalTargetDoughWeightWithBuffer - totalDoughWeightForAllBalls;
 
-    // Calculate total weight of dough
-    var totalWeightOfDough = numBalls * doughSize;
+            const poolishPrefermentWeightAsRatioOfTotalFlour = 0.20; 
+            const poolishYeastRateOnPrefermentWeight = 0.13; 
 
-    // Apply waste percentage to total weight of dough
-    var totalWeightWithWaste = totalWeightOfDough * 1.05;
+            const baseIngredientPercentagesForTotalFlour = 100 + hydration + saltPercentage + yeastPercentageFromInput;
+            const totalFlour = totalTargetDoughWeightWithBuffer / (baseIngredientPercentagesForTotalFlour / 100);
 
-    // Calculate total percentages
-    var totalPercentages = 100 + hydration + saltPercentage + yeastPercentage;
+            // --- Poolish Calculations ---
+            const totalWeightOfPoolishPreferment = totalFlour * poolishPrefermentWeightAsRatioOfTotalFlour;
+            const poolishFlour_amount = totalWeightOfPoolishPreferment / 2;
+            const poolishWater_amount = totalWeightOfPoolishPreferment / 2;
+            const poolishYeast_amount = (poolishYeastRateOnPrefermentWeight / 100) * totalWeightOfPoolishPreferment;
 
-    // Calculate multiplier
-    var multiplier = totalPercentages / 100;
+            // --- Main Dough Calculations ---
+            const mainDoughFlour = totalFlour - poolishFlour_amount;
+            const totalWater_overall = (hydration / 100) * totalFlour;
+            const mainDoughWater = totalWater_overall - poolishWater_amount;
+            const mainDoughSalt = (saltPercentage / 100) * totalFlour; 
+            const mainDoughYeast = (yeastPercentageFromInput / 100) * mainDoughFlour; 
 
-    // Calculate total flour
-    var totalFlour = totalWeightWithWaste / multiplier;
+            const finalRecipeWeight = poolishFlour_amount + poolishWater_amount + poolishYeast_amount + mainDoughFlour + mainDoughWater + mainDoughSalt + mainDoughYeast;
+            const actualLeftover = finalRecipeWeight - totalDoughWeightForAllBalls;
 
-    // Calculate poolish size (20% of total flour weight)
-    var poolishSize = totalFlour * 0.20;
+            // Display results
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "<h2>Recipe Breakdown</h2>" +
+                                   "<h3>Poolish</h3>" +
+                                   // Updated rounding for flour, water, yeast
+                                   "<p>Flour: " + poolishFlour_amount.toFixed(0) + "g</p>" +
+                                   "<p>Water: " + poolishWater_amount.toFixed(0) + "g</p>" +
+                                   "<p>Yeast (IDY): " + poolishYeast_amount.toFixed(2) + "g</p>" +
+                                   "<h3>Main Dough</h3>" +
+                                   // Updated rounding for flour, water, yeast
+                                   "<p>Flour: " + mainDoughFlour.toFixed(0) + "g</p>" +
+                                   "<p>Water: " + mainDoughWater.toFixed(0) + "g</p>" +
+                                   "<p>Salt: " + mainDoughSalt.toFixed(2) + "g</p>" + // Salt remains toFixed(2)
+                                   "<p>Yeast (IDY): " + mainDoughYeast.toFixed(2) + "g</p>" +
+                                   "<hr style='margin: 15px 0; border-top: 1px solid #e6f6ff;'>" + 
+                                   "<h3>Totals</h3>" +
+                                   // Updated rounding for flour, water, yeast
+                                   "<p>Total Flour: " + totalFlour.toFixed(0) + "g</p>" +
+                                   "<p>Total Water: " + totalWater_overall.toFixed(0) + "g</p>" +
+                                   "<p>Total Salt: " + mainDoughSalt.toFixed(2) + "g</p>" + // Salt remains toFixed(2)
+                                   "<p>Total Yeast (IDY): " + (poolishYeast_amount + mainDoughYeast).toFixed(2) + "g</p>" +
+                                   "<p><strong>Total Dough Weight (approx.): " + finalRecipeWeight.toFixed(0) + "g</strong></p>" +
+                                   "<p><em>After making " + numBalls + (numBalls === 1 ? " dough ball" : " dough balls") + " of " + doughSize.toFixed(0) + "g each, you should have approximately " + actualLeftover.toFixed(0) + "g of dough leftover.</em></p>" +
+                                   "<p><small>This recipe aims to produce enough dough for " + numBalls + (numBalls === 1 ? " ball" : " balls") + " (" + totalDoughWeightForAllBalls.toFixed(0) + "g) plus an intended ~5% buffer (approx. " + bufferAmount.toFixed(0) + "g). Target with buffer: " + totalTargetDoughWeightWithBuffer.toFixed(0) + "g. Actual recipe yield: " + finalRecipeWeight.toFixed(0) + "g.</small></p>";
+        }
 
-    // Calculate flour and water for poolish (divide poolish size by 2)
-    var poolishFlour = poolishSize / 2;
-    var poolishWater = poolishSize / 2;
+        /**
+         * Displays an error message in the #results div.
+         * @param {string} message - The error message to display.
+         */
+        function displayError(message) {
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "<h2 style='color: #f04e98;'>Error</h2><p style='color: #f04e98; text-align: center;'>" + message + "</p>";
+        }
 
-    // Calculate yeast for poolish (0.13% of total poolish size)
-    var poolishYeast = 0.13 / 100 * poolishSize;
-
-    // Calculate water, salt, and yeast for the main dough
-    var water = (hydration / 100) * totalFlour;
-    var salt = (saltPercentage / 100) * totalFlour;
-    var yeast = (yeastPercentage / 100) * (totalFlour - poolishFlour);
-
-    // Subtract flour and water used in poolish from total flour and water
-    totalFlour -= poolishFlour;
-    water -= poolishWater;
-
-    // Display results
-    var resultsDiv = document.getElementById("results");
-    resultsDiv.innerHTML = "<h2>Results</h2>" +
-                       "<h3>Poolish</h3>" +
-                       "<p>Size: " + poolishSize.toFixed(0) + "g</p>" +
-                       "<p>Flour: " + poolishFlour.toFixed(0) + "g</p>" +
-                       "<p>Water: " + poolishWater.toFixed(0) + "g</p>" +
-                       "<p>Yeast: " + poolishYeast.toFixed(2) + "g</p>" +
-                       "<h3>Dough</h3>" +
-                       "<p>Flour: " + totalFlour.toFixed(0) + "g</p>" +
-                       "<p>Water: " + water.toFixed(0) + "g</p>" +
-                       "<p>Salt: " + salt.toFixed(2) + "g</p>" +
-                       "<p>Yeast: " + yeast.toFixed(2) + "g</p>";
-
-}
-
-function toggleCustomization() {
-    var customFieldsDiv = document.getElementById("customFields");
-    var customizeCheckbox = document.getElementById("customize");
-
-    // If the checkbox is checked, show the customFields div; otherwise, hide it
-    if (customizeCheckbox.checked) {
-        customFieldsDiv.style.display = "block";
-    } else {
-        customFieldsDiv.style.display = "none";
-    }
-}
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultsDiv = document.getElementById("results");
+            if (!resultsDiv.innerHTML.includes("<h3>")) { 
+                 resultsDiv.innerHTML = '<h2>Recipe Breakdown</h2><p style="text-align:center; color: #777;">Enter your dough parameters above and click "Calculate".</p>';
+            }
+        });
