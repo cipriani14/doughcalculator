@@ -8,8 +8,8 @@ function calculate() {
     var customizeCheckbox = document.getElementById("customize");
     var customYeast = parseFloat(document.getElementById("yeast").value);
     var customSalt = parseFloat(document.getElementById("salt").value);
-    var saltPercentage = customizeCheckbox.checked ? customSalt : 3; // Default salt percentage if not customized
-    var yeastPercentage = customizeCheckbox.checked ? customYeast : 0.5; // Default yeast percentage if not customized
+    var saltPercentage = customizeCheckbox.checked ? customSalt : 2.7; // Default salt percentage if not customized
+    var yeastPercentage = customizeCheckbox.checked ? customYeast : 0.05; // Default yeast percentage if not customized
 
     // Calculate total weight of dough
     var totalWeightOfDough = numBalls * doughSize;
