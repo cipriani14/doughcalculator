@@ -1,94 +1,111 @@
 /* styles.css content with new custom theme (pink and blue) */
-        body {
-            font-family: "iA Writer Duo", monospace;
-            margin: 0;
-            padding: 20px;
-            background-color: #fff8fb; /* Very light pinkish background to complement f04e98 */
-            color: #333333; /* Standard dark gray text for readability */
-        }
+body {
+    font-family: "iA Writer Duo", monospace;
+    margin: 0;
+    padding: 20px;
+    background-color: #fff8fb; 
+    color: #333333; 
+}
 
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            color: #0095c8; /* Secondary color (blue) for main heading */
-        }
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #0095c8; 
+}
 
-        .container {
-            display: block;
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: #ffffff; /* White background for the calculator box */
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 25px;
-        }
+.container {
+    display: block;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #ffffff; 
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #0095c8; /* Secondary color (blue) for labels */
-            font-weight: bold;
-        }
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #0095c8; 
+    font-weight: bold;
+}
 
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-family: "iA Writer Duo", monospace;
-            background-color: #fdfdfd;
-        }
-        /* Style for focused input fields */
-        input[type="number"]:focus {
-            border-color: #f04e98; /* Primary color (pink) for border on focus */
-            outline: none; /* Remove default outline */
-            box-shadow: 0 0 0 2px rgba(240, 78, 152, 0.2); /* Subtle glow with primary color */
-        }
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: "iA Writer Duo", monospace;
+    background-color: #fdfdfd;
+}
+input[type="number"]:focus {
+    border-color: #f04e98; 
+    outline: none; 
+    box-shadow: 0 0 0 2px rgba(240, 78, 152, 0.2); 
+}
 
-        button {
-            width: 100%;
-            background-color: #f04e98; /* Primary color (pink) for button */
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: "iA Writer Duo", monospace;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            margin-top: 10px; 
-        }
+button {
+    width: 100%;
+    background-color: #f04e98; 
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "iA Writer Duo", monospace;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; 
+}
 
-        button:hover {
-            background-color: #d94689; /* Darker shade of primary pink for hover */
-        }
+button:hover {
+    background-color: #d94689; 
+}
 
-        #results {
-            margin-top: 25px;
-            text-align: left;
-            padding: 20px;
-            background-color: #f7fcff; 
-            border-radius: 4px;
-            border: 1px solid #e6f6ff; 
-        }
+#results {
+    margin-top: 25px;
+    text-align: left;
+    padding: 20px;
+    background-color: #f7fcff; 
+    border-radius: 4px;
+    border: 1px solid #e6f6ff; 
+}
 
-        #results h2 {
-            margin-top: 0;
-            color: #0095c8; 
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        #results h3 {
-            color: #f04e98; 
-            margin-top: 20px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ffeaf4; 
-            padding-bottom: 8px;
-        }
-        #results p {
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
+#results h2 {
+    margin-top: 0;
+    color: #0095c8; 
+    text-align: center;
+    margin-bottom: 15px;
+}
+#results h3 {
+    color: #f04e98; 
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ffeaf4; 
+    padding-bottom: 8px;
+}
+/* Style for the clickable Totals heading */
+.collapsible-header {
+    cursor: pointer;
+    user-select: none; /* Prevents text selection on click */
+}
+.collapsible-header:hover {
+    opacity: 0.8;
+}
+.toggle-arrow {
+    display: inline-block;
+    margin-left: 8px;
+    transition: transform 0.2s ease-in-out;
+}
+.toggle-arrow.expanded { /* This class will be added by JS to rotate the arrow */
+    transform: rotate(90deg);
+}
+
+#results p {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
