@@ -14,18 +14,20 @@ function calculate() {
     if (isNaN(doughSize) || doughSize <= 0 ||
         isNaN(numBalls) || numBalls <= 0 ||
         isNaN(hydration) || hydration < 0 || hydration > 100 ||
-        isNaN(yeastPercentageFromInput) || yeastPercentageFromInput < 0 || 
-        isNaN(saltPercentage) || saltPercentage < 0) { 
+        isNaN(yeastPercentageFromInput) || yeastPercentageFromInput < 0 ||
+        isNaN(saltPercentage) || saltPercentage < 0) {
         displayError("Please enter valid positive values for all fields.");
         return;
     }
-    
+
     // --- Calculation Logic ---
     const totalDoughWeightForAllBalls = numBalls * doughSize;
-    const totalTargetDoughWeightWithBuffer = totalDoughWeightForAllBalls * 1.05; 
+    const totalTargetDoughWeightWithBuffer = totalDoughWeightForAllBalls * 1.05;
     const bufferAmount = totalTargetDoughWeightWithBuffer - totalDoughWeightForAllBalls;
 
-    const poolishPrefermentWeightAsRatioOfTotalFlour = 0.20; 
+    const poolishPrefermentWeightAsRatioOfTotalFlour = 0.20;
+    // NEW: Hardcoded yeast percentage specifically for the poolish
+    const poolishYeastPercentage = 0.25;
 
     const baseIngredientPercentagesForTotalFlour = 100 + hydration + saltPercentage + yeastPercentageFromInput;
     const totalFlour = totalTargetDoughWeightWithBuffer / (baseIngredientPercentagesForTotalFlour / 100);
@@ -34,15 +36,16 @@ function calculate() {
     const totalWeightOfPoolishPreferment = totalFlour * poolishPrefermentWeightAsRatioOfTotalFlour;
     const poolishFlour_amount = totalWeightOfPoolishPreferment / 2;
     const poolishWater_amount = totalWeightOfPoolishPreferment / 2;
-    // UPDATED YEAST CALCULATION
-    const poolishYeast_amount = (yeastPercentageFromInput / 100) * poolishFlour_amount;
+    // UPDATED: Poolish yeast now uses the hardcoded percentage
+    const poolishYeast_amount = (poolishYeastPercentage / 100) * poolishFlour_amount;
 
     // --- Main Dough Calculations ---
     const mainDoughFlour = totalFlour - poolishFlour_amount;
     const totalWater_overall = (hydration / 100) * totalFlour;
     const mainDoughWater = totalWater_overall - poolishWater_amount;
-    const mainDoughSalt = (saltPercentage / 100) * totalFlour; 
-    const mainDoughYeast = (yeastPercentageFromInput / 100) * mainDoughFlour; 
+    const mainDoughSalt = (saltPercentage / 100) * totalFlour;
+    // UNCHANGED: Main dough yeast still uses the user's input
+    const mainDoughYeast = (yeastPercentageFromInput / 100) * mainDoughFlour;
 
     const finalRecipeWeight = poolishFlour_amount + poolishWater_amount + poolishYeast_amount + mainDoughFlour + mainDoughWater + mainDoughSalt + mainDoughYeast;
     const actualLeftover = finalRecipeWeight - totalDoughWeightForAllBalls;
@@ -59,7 +62,7 @@ function calculate() {
                            "<p>Water: " + mainDoughWater.toFixed(0) + "g</p>" +
                            "<p>Salt: " + mainDoughSalt.toFixed(2) + "g</p>" +
                            "<p>Yeast (IDY): " + mainDoughYeast.toFixed(2) + "g</p>" +
-                           "<hr style='margin: 15px 0; border-top: 1px solid #e6f6ff;'>" + 
+                           "<hr style='margin: 15px 0; border-top: 1px solid #e6f6ff;'>" +
                            "<h3 class='collapsible-header' onclick='toggleTotals()'>" +
                                "Totals <span id='totalsToggleArrow' class='toggle-arrow'>►</span>" +
                            "</h3>" +
@@ -72,7 +75,7 @@ function calculate() {
                                "<p><em>After making " + numBalls + (numBalls === 1 ? " dough ball" : " dough balls") + " of " + doughSize.toFixed(0) + "g each, you should have approximately " + actualLeftover.toFixed(0) + "g of dough leftover.</em></p>" +
                                "<p><small>This recipe aims to produce enough dough for " + numBalls + (numBalls === 1 ? " ball" : " balls") + " (" + totalDoughWeightForAllBalls.toFixed(0) + "g) plus an intended ~5% buffer (approx. " + bufferAmount.toFixed(0) + "g). Target with buffer: " + totalTargetDoughWeightWithBuffer.toFixed(0) + "g. Actual recipe yield: " + finalRecipeWeight.toFixed(0) + "g.</small></p>" +
                            "</div>";
-    
+
     const totalsContentDiv = document.getElementById('totalsContent');
     const totalsArrowSpan = document.getElementById('totalsToggleArrow');
     if (totalsContentDiv) totalsContentDiv.style.display = 'none';
