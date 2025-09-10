@@ -26,17 +26,16 @@ function calculate() {
     const bufferAmount = totalTargetDoughWeightWithBuffer - totalDoughWeightForAllBalls;
 
     const poolishPrefermentWeightAsRatioOfTotalFlour = 0.20;
-    // NEW: Hardcoded yeast percentage specifically for the poolish
     const poolishYeastPercentage = 0.25;
 
-    const baseIngredientPercentagesForTotalFlour = 100 + hydration + saltPercentage + yeastPercentageFromInput;
+    // CORRECTED LINE: The user's yeast input is removed from this foundational calculation.
+    const baseIngredientPercentagesForTotalFlour = 100 + hydration + saltPercentage;
     const totalFlour = totalTargetDoughWeightWithBuffer / (baseIngredientPercentagesForTotalFlour / 100);
 
     // --- Poolish Calculations ---
     const totalWeightOfPoolishPreferment = totalFlour * poolishPrefermentWeightAsRatioOfTotalFlour;
     const poolishFlour_amount = totalWeightOfPoolishPreferment / 2;
     const poolishWater_amount = totalWeightOfPoolishPreferment / 2;
-    // UPDATED: Poolish yeast now uses the hardcoded percentage
     const poolishYeast_amount = (poolishYeastPercentage / 100) * poolishFlour_amount;
 
     // --- Main Dough Calculations ---
@@ -44,7 +43,6 @@ function calculate() {
     const totalWater_overall = (hydration / 100) * totalFlour;
     const mainDoughWater = totalWater_overall - poolishWater_amount;
     const mainDoughSalt = (saltPercentage / 100) * totalFlour;
-    // UNCHANGED: Main dough yeast still uses the user's input
     const mainDoughYeast = (yeastPercentageFromInput / 100) * mainDoughFlour;
 
     const finalRecipeWeight = poolishFlour_amount + poolishWater_amount + poolishYeast_amount + mainDoughFlour + mainDoughWater + mainDoughSalt + mainDoughYeast;
